@@ -1,4 +1,4 @@
-# mn-task-mcp-server
+# task-mcp-server
 
 A meaningful Micronaut MCP server example: an in-memory task tracker.
 
@@ -16,10 +16,12 @@ It exposes MCP tools for daily task management:
 - `delete-task`
 - `task-agent` (simple command-based task agent)
 
+Separate LLM agent module is now in `task-agent/` (own Maven module and runtime).
+
 ## Build
 
 ```bash
-cd /Users/jmpurush/mywork/ai-llm/mcp/mn-mcp-server-simple
+cd /Users/jmpurush/mywork/ai-llm/mcp/java-ai-lab/task-mcp-server
 mvn clean package -DskipTests
 ```
 
@@ -82,6 +84,8 @@ curl -sS -H 'content-type: application/json' \
   -d '{"jsonrpc":"2.0","id":6,"method":"tools/call","params":{"name":"task-agent","arguments":{"command":"list","includeCompleted":true}}}' \
   http://127.0.0.1:8080/mcp
 ```
+
+See `task-agent/README.md` for LLM agent APIs and usage.
 
 ## REST add/delete using same in-memory store
 

@@ -3,17 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>mn.mcp</groupId>
-    <artifactId>mn-task-mcp-server</artifactId>
+    <groupId>com.jobinesh.ai.example</groupId>
+    <artifactId>task-agent</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <micronaut.version>4.10.8-oracle-00001</micronaut.version>
-        <micronaut.mcp.version>0.0.20</micronaut.mcp.version>
+        <micronaut.langchain4j.version>1.0.0</micronaut.langchain4j.version>
     </properties>
 
     <dependencyManagement>
@@ -22,6 +21,13 @@
                 <groupId>io.micronaut</groupId>
                 <artifactId>micronaut-core-bom</artifactId>
                 <version>${micronaut.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.micronaut.langchain4j</groupId>
+                <artifactId>micronaut-langchain4j-bom</artifactId>
+                <version>${micronaut.langchain4j.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -42,9 +48,8 @@
             <artifactId>micronaut-http-server-netty</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.mcp</groupId>
-            <artifactId>micronaut-mcp-server-java-sdk</artifactId>
-            <version>${micronaut.mcp.version}</version>
+            <groupId>io.micronaut.langchain4j</groupId>
+            <artifactId>micronaut-langchain4j-openai</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -68,8 +73,8 @@
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
-                        <arg>-Amicronaut.processing.group=mn.mcp</arg>
-                        <arg>-Amicronaut.processing.module=mn-task-mcp-server</arg>
+                        <arg>-Amicronaut.processing.group=com.jobinesh.ai.example</arg>
+                        <arg>-Amicronaut.processing.module=task-agent</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
@@ -78,7 +83,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.6.1</version>
                 <configuration>
-                    <mainClass>mn.mcp.server.Application</mainClass>
+                    <mainClass>com.jobinesh.ai.example.Application</mainClass>
                     <classpathScope>runtime</classpathScope>
                 </configuration>
             </plugin>

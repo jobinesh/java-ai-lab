@@ -1,7 +1,8 @@
-package mn.mcp.server;
+package com.jobinesh.ai.example;
 
 import io.micronaut.mcp.annotations.Tool;
 import io.micronaut.mcp.annotations.ToolArg;
+import io.micronaut.core.annotation.Nullable;
 import jakarta.inject.Singleton;
 
 import java.time.LocalDate;
@@ -18,10 +19,10 @@ class TaskMcpTools {
 
     @Tool(name = "create-task", description = "Create a new task")
     TaskView createTask(@ToolArg(name = "title") String title,
-                        @ToolArg(name = "description") String description,
-                        @ToolArg(name = "priority") String priority,
-                        @ToolArg(name = "dueDate", description = "Optional yyyy-MM-dd") String dueDate,
-                        @ToolArg(name = "tags", description = "Optional comma-separated tags") String tags) {
+                        @ToolArg(name = "description", description = "Optional description") @Nullable String description,
+                        @ToolArg(name = "priority", description = "Optional LOW|MEDIUM|HIGH") @Nullable String priority,
+                        @ToolArg(name = "dueDate", description = "Optional yyyy-MM-dd") @Nullable String dueDate,
+                        @ToolArg(name = "tags", description = "Optional comma-separated tags") @Nullable String tags) {
         TaskPriority parsedPriority = TaskInputParser.parsePriority(priority).orElse(TaskPriority.MEDIUM);
         LocalDate parsedDueDate = TaskInputParser.parseDate(dueDate).orElse(null);
         return taskStore.create(
@@ -94,10 +95,10 @@ class TaskMcpTools {
         return switch (normalized) {
             case "create" -> createTask(
                 title.orElse(""),
-                description.orElse(""),
-                priority.orElse(""),
-                dueDate.orElse(""),
-                tags.orElse("")
+                description.orElse(null),
+                priority.orElse(null),
+                dueDate.orElse(null),
+                tags.orElse(null)
             );
             case "get" -> id.<Object>map(this::getTask).orElse("MISSING_ID");
             case "delete" -> id.map(this::deleteTask).orElse("MISSING_ID");

@@ -1,4 +1,4 @@
-package mn.mcp.server;
+package com.jobinesh.ai.example;
 
 enum TaskPriority {
     LOW,

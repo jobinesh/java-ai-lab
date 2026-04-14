@@ -1,4 +1,4 @@
-package mn.mcp.server;
+package com.jobinesh.ai.example;
 
 import java.time.Instant;
 import java.time.LocalDate;

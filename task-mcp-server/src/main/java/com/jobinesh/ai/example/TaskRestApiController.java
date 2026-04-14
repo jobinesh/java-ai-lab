@@ -1,4 +1,4 @@
-package mn.mcp.server;
+package com.jobinesh.ai.example;
 
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Body;
